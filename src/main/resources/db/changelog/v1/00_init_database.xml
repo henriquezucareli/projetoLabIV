@@ -1,0 +1,80 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <changeSet  id="1"  author="HenriqueZucareli">
+        <sql>
+            CREATE TABLE aluno (
+            id int NOT NULL AUTO_INCREMENT,
+            nome varchar(255) NOT NULL,
+            turma_id int NOT NULL,
+            CONSTRAINT aluno_pk PRIMARY KEY (id)
+            );
+
+            CREATE TABLE curso (
+            id int NOT NULL AUTO_INCREMENT,
+            nome varchar(255) NOT NULL,
+            periodicidade varchar(255) NOT NULL,
+            descricao varchar(255) NOT NULL,
+            CONSTRAINT curso_pk PRIMARY KEY (id)
+            );
+
+            CREATE TABLE disciplina (
+            id int NOT NULL AUTO_INCREMENT,
+            nome varchar(255) NOT NULL,
+            carga_horaria int NOT NULL,
+            ementa varchar(255) NOT NULL,
+            curso_id int NOT NULL,
+            CONSTRAINT disciplina_pk PRIMARY KEY (id)
+            );
+
+            CREATE TABLE professor (
+            id int NOT NULL AUTO_INCREMENT,
+            nome varchar(255) NOT NULL,
+            titulacao varchar(255) NOT NULL,
+            CONSTRAINT professor_pk PRIMARY KEY (id)
+            );
+
+            CREATE TABLE professor_disciplina (
+            disciplina_id int NOT NULL,
+            professor_id int NOT NULL,
+            CONSTRAINT professor_disciplina_pk PRIMARY KEY (disciplina_id,professor_id)
+            );
+
+            CREATE TABLE turma (
+            id int NOT NULL AUTO_INCREMENT,
+            descricao varchar(255) NOT NULL,
+            disciplina_id int NOT NULL,
+            curso_id int NOT NULL,
+            professor_id int NOT NULL,
+            CONSTRAINT turma_pk PRIMARY KEY (id)
+            );
+
+            ALTER TABLE aluno ADD CONSTRAINT aluno_turma FOREIGN KEY aluno_turma (turma_id)
+            REFERENCES turma (id);
+
+            ALTER TABLE disciplina ADD CONSTRAINT disciplina_curso FOREIGN KEY disciplina_curso (curso_id)
+            REFERENCES curso (id);
+
+            ALTER TABLE professor_disciplina ADD CONSTRAINT professor_disciplina_disciplina FOREIGN KEY professor_disciplina_disciplina (disciplina_id)
+            REFERENCES disciplina (id);
+
+            ALTER TABLE professor_disciplina ADD CONSTRAINT professor_disciplina_professor FOREIGN KEY professor_disciplina_professor (professor_id)
+            REFERENCES professor (id);
+
+            ALTER TABLE turma ADD CONSTRAINT turma_curso FOREIGN KEY turma_curso (curso_id)
+            REFERENCES curso (id);
+
+            ALTER TABLE turma ADD CONSTRAINT turma_disciplina FOREIGN KEY turma_disciplina (disciplina_id)
+            REFERENCES disciplina (id);
+
+            ALTER TABLE turma ADD CONSTRAINT turma_professor FOREIGN KEY turma_professor (professor_id)
+            REFERENCES professor (id);
+        </sql>
+    </changeSet>
+
+
+
+</databaseChangeLog>
