@@ -10,6 +10,7 @@ import java.util.Set;
 @Table(name = "turma")
 public class Turma {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String descricao;
     @ManyToOne

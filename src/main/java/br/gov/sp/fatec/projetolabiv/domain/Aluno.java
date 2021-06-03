@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "aluno")
 public class Aluno {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     @ManyToOne
