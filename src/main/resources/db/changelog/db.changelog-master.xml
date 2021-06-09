@@ -6,6 +6,7 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     <include  file="db/changelog/v1/00_init_database.xml"/>
     <include  file="db/changelog/v1/01_change_aluno.xml"/>
+    <include  file="db/changelog/v1/02_create_aula.xml"/>
 
 
 </databaseChangeLog> 

@@ -15,10 +15,8 @@ public class TurmaPayloadResponse {
 
     private Integer id;
     private String descricao;
-    private ProfessorPayloadResponse professor;
-    private CursoPayloadResponse curso;
-    private DisciplinaPayloadResponse disciplina;
     private Set<AlunoPayloadResponse> alunos;
+    private CursoPayloadResponse curso;
 
 
 }

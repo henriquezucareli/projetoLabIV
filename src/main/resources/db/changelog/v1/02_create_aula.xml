@@ -1,0 +1,54 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <changeSet  id="1"  author="HenriqueZucareli">
+        <sql>
+            CREATE TABLE aula (
+            id int NOT NULL AUTO_INCREMENT,
+            disciplina_id int NOT NULL,
+            curso_id int NOT NULL,
+            professor_id int NOT NULL,
+            turma_id int NOT NULL,
+            CONSTRAINT aula_pk PRIMARY KEY (id)
+            );
+
+            ALTER TABLE aula ADD CONSTRAINT aula_curso FOREIGN KEY aula_curso (curso_id)
+            REFERENCES curso (id);
+
+            ALTER TABLE aula ADD CONSTRAINT aula_disciplina FOREIGN KEY aula_disciplina (disciplina_id)
+            REFERENCES disciplina (id);
+
+            ALTER TABLE aula ADD CONSTRAINT aula_professor FOREIGN KEY aula_professor (professor_id)
+            REFERENCES professor (id);
+
+            ALTER TABLE aula ADD CONSTRAINT aula_turma FOREIGN KEY aula_turma (turma_id)
+            REFERENCES turma (id);
+
+            ALTER TABLE turma DROP CONSTRAINT turma_curso;
+
+            ALTER TABLE turma DROP CONSTRAINT turma_disciplina;
+
+            ALTER TABLE turma DROP CONSTRAINT turma_professor;
+
+            ALTER TABLE turma DROP COLUMN curso_id;
+
+            ALTER TABLE turma DROP COLUMN disciplina_id;
+
+            ALTER TABLE turma DROP COLUMN professor_id;
+        </sql>
+    </changeSet>
+    <changeSet id="2" author="HenriqueZucareli">
+        <sql>
+            ALTER TABLE turma ADD curso_id int NOT NULL;
+
+            ALTER TABLE turma ADD CONSTRAINT turma_curso FOREIGN KEY turma_curso (curso_id)
+            REFERENCES curso (id);
+        </sql>
+    </changeSet>
+
+
+
+</databaseChangeLog>

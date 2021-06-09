@@ -1,8 +1,10 @@
 package br.gov.sp.fatec.projetolabiv.controller.payload;
 
+import br.gov.sp.fatec.projetolabiv.domain.Curso;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -14,6 +16,8 @@ public class TurmaPayloadRequest {
     private String descricao;
 
     private Set<Integer> alunos;
-    private Set<Integer> professores;
+
+    @NotNull(message = "Curso obrigatório!")
+    private Integer curso;
 
 }
