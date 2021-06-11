@@ -4,10 +4,12 @@ import br.gov.sp.fatec.projetolabiv.domain.Aluno;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
 
+@Repository
 public interface AlunoDao extends CrudRepository<Aluno, Integer> {
 
     @Query("SELECT a FROM Aluno a JOIN a.turma t WHERE (a.nome = :nome OR :nome is null) AND (t.id = :turma OR :turma is null) ORDER BY a.nome")
